@@ -1,3 +1,4 @@
 # Files and directories to ignore
 
 slides/
+pub/
