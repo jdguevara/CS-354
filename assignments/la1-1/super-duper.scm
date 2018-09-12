@@ -1,9 +1,17 @@
-; Scheme la1-1 program
+; Scheme copy program
+(define (copy source count)
+    (do ((i 1 (1+ i)))
+        ((i > count))
+        (display source)))
 
-(define (super-duper seq count)
-  (if (null? seq)
-      0
-      (+ (car seq) (sum (cdr seq)))))
-
-(display (sum '(5 6 1 8 3 7)))
+(define (super-duper source count)
+    (if (null? source)
+        source
+        (if (number? source)
+            source
+        (copy source count))))
+        
+; (display (super-duper 123 2))
+; (display (super-duper '( ) 2))
+(display (super-duper '(x) 2))
 (display "\n")
