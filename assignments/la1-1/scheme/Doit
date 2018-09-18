@@ -1,5 +1,0 @@
-#!/bin/bash -x
-
-guile sum.scm
-guile sumtail.scm
-guile sumapply.scm
