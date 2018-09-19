@@ -1,6 +1,12 @@
 ; Scheme copy program
 (define (copy source count)
-        (make-list count source))
+    (cond ((null? source) 
+           source)
+          ((number? source) 
+           source)
+          ((string? source) 
+           source)
+          (else (make-list count source))))
 
 (define (super-duper source count)
     (cond ((null? source) 
@@ -10,8 +16,8 @@
           ((string? source) 
            source)
           ((pair? (list-ref source 0)) 
-           (append (copy (super-duper (list-ref source 0) count) count) (super-duper (cdr source) count)))
-          (else (append (copy (car source) count) (super-duper (cdr source) count)))))
+           (cons (copy (super-duper (list-ref source 0) count) count) (super-duper (cdr source) count)))
+          (else (cons (copy (car source) count) (super-duper (cdr source) count)))))
 
 ; Test cases
 ;; Numbers
