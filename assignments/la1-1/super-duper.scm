@@ -35,7 +35,7 @@
 (display "\n")
 
 ;; Lists within a list (including empty lists)
-(display (super-duper '((a b) y) 3))
+(display (super-duper '((a b c) y) 3))
 (display "\n")
 (display (super-duper '(( ) y) 3))
 (display "\n")
