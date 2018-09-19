@@ -49,3 +49,6 @@
 (display "\n")
 (display (super-duper '(x y (d (e))) 2))
 (display "\n")
+(display (super-duper '(x ( )) 3))
+(display "\n")
+
