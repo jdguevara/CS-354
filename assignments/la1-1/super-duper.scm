@@ -8,10 +8,6 @@
             (make-list 1 source))
           ((boolean? source)
             (make-list 1 source))
-          ((symbol? source)
-            (make-list 1 source))
-          ((char? source)
-            (make-list 1 source))
           (else (make-list count source))))
 
 (define (super-duper source count)
@@ -23,10 +19,6 @@
            source)
           ((boolean? source)
            source)
-          ((symbol? source)
-           source)
-          ((char? source)
-           source)
           ((pair? (list-ref source 0)) 
            (append (copy (super-duper (list-ref source 0) count) count) (super-duper (cdr source) count)))
           (else (append (copy (car source) count) (super-duper (cdr source) count)))))
@@ -34,19 +26,36 @@
 
 
 ; Test cases
-;; Numbers
+; Atoms such as: numbers, boolean, symbols, strings, symbols, and characters,
+; as well as empty lists, should return only once if passed to super-duper even if in a list.
+
+;; Numbers 
+(display "Numbers:")
+(display "\n")
 (display (super-duper 123 1))
 (display "\n")
 (display (super-duper 123 2))
 (display "\n")
-(display (super-duper '(123 123) 2))
+(display (super-duper '(123 456) 2))
 (display "\n")
 (display (super-duper '(x 123 y) 2))
 (display "\n")
 (display (super-duper '(x (123) y) 2))
+(display "\n\n")
+
+;; Strings
+(display "Strings:")
 (display "\n")
+(display (super-duper "Hello" 2))
+(newline)
+(display (super-duper '(x "Hello" y) 2))
+(newline)
+(display (super-duper '(x ("Hello") y) 2))
+(display "\n\n")
 
 ;; Booleans
+(display "Booleans:")
+(display "\n")
 (display (super-duper #t 2))
 (newline)
 (display (super-duper '(#t) 2))
@@ -54,27 +63,22 @@
 (display (super-duper '(x #t y) 2))
 (newline)
 (display (super-duper '(x (#t) y) 2))
-(newline)
-
-;; Symbols
-(display (super-duper 'a 2))
-(newline)
-
-;; Characters
-(display (super-duper #\A 2 ))
-(newline)
+(display "\n\n")
 
 ;; Empty list
+(display "Empty list\n")
 (display (super-duper '() 2))
-(display "\n")
+(display "\n\n")
 
 ;; Normal List
+(display "Normal lists:\n")
 (display (super-duper '(x y) 1))
 (display "\n")
 (display (super-duper '(x y) 2))
-(display "\n")
+(display "\n\n")
 
 ;; Lists within a list (including empty lists)
+(display "Lists within lists:\n")
 (display (super-duper '((a b c) y) 3))
 (display "\n")
 (display (super-duper '(( ) y) 3))
