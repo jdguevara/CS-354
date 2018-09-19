@@ -20,7 +20,7 @@
 (display (super-duper 123 2))
 (display "\n")
 
-;; Number List
+;; Numbers in a List
 (display (super-duper '(123 123) 2))
 (display "\n")
 
