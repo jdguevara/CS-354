@@ -1,0 +1,14 @@
+stmt  : assn ';'
+assn  : id '=' expr
+expr  : term addop expr
+      | term
+term  : fact mulop term
+      | fact
+fact  : id 
+      | (sign) num
+      | '(' expr ')'
+addop : '+'
+      | '-'
+mulop : '*'
+      | '/'
+sign  : '-'
