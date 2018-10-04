@@ -1,6 +1,8 @@
 // This class is a scanner for the program
 // and programming language being interpreted.
 
+// Modified by: Jaime Guevara
+
 import java.util.*;
 
 public class Scanner {
@@ -16,9 +18,12 @@ public class Scanner {
     private Set<String> legits=new HashSet<String>();
     private Set<String> keywords=new HashSet<String>();
     private Set<String> operators=new HashSet<String>();
-
+    
+    // Additional sets for comments and signs
+    private Set<String> comments=new HashSet<String>();
+    private Set<String> signs=new HashSet<String>();
+    
     // initializers for previous sets
-
     private void fill(Set<String> s, char lo, char hi) {
 	for (char c=lo; c<=hi; c++)
 	    s.add(c+"");
@@ -57,6 +62,31 @@ public class Scanner {
 
     private void initKeywords(Set<String> s) {
     }
+    
+    /**
+     * used to register symbols 
+     * that denote comments
+     * in a Java program
+     * 
+     * @param s - set string holding our comment characters
+     */
+    private void initComments(Set<String> s) {
+    	s.add("//"); // Single line comments
+    	s.add("/*"); // Beginning of block comment
+    	s.add("/**"); // Beginning of Javadoc
+    	s.add("*/"); // End of block comment or Javadoc
+    }
+    
+    /**
+     * This is used to help with the implementation of
+     * the unary minus operator so the scanner can tell
+     * if a number is negative or not.
+     * 
+     * @param s - string holding our sign characters
+     */
+    private void initSigns(Set<String> s) {
+    	s.add("-");
+    }
 
     // constructor:
     //   - squirrel-away source program
@@ -71,6 +101,8 @@ public class Scanner {
 	initLegits(legits);
 	initKeywords(keywords);
 	initOperators(operators);
+	initComments(comments); // Initializing comments
+	initSigns(signs); // Initializing signs
     }
 
     // handy string-processing methods
@@ -92,7 +124,6 @@ public class Scanner {
     }
 
     // scan various kinds of lexeme
-
     private void nextNumber() {
 	int old=pos;
 	many(digits);
@@ -121,7 +152,63 @@ public class Scanner {
 	String lexeme=program.substring(old,pos);
 	token=new Token(lexeme); // one-char operator
     }
-
+    
+    /**
+     * Looking to see if our next string will be a comment or not
+     */
+    private void nextComm() {
+    	int old=pos;
+    	pos = old+2; // We need to take the first two characters to see if what we have is a comment (i.e. // or /*)
+    	many(comments);
+    	// Check for different comment types and turn them to whitespace
+    	String lexeme;
+    	lexeme=program.substring(old,pos);
+    	if (lexeme.matches("//")) { // Single-line comment
+    		while(!done()) { // While the character at the given position does not equal a 
+    			lexeme=program.substring(old,pos);
+    			pos++;
+    		}
+    		lexeme=program.substring(old,pos);
+    	} else if (lexeme.matches("/\\*") && !program.substring(old,pos+1).matches("/\\*\\*")) { // Regular comment block
+    		while(!lexeme.endsWith("*/")) {
+    			pos++;
+    			lexeme=program.substring(old,pos);
+    		}
+    		lexeme=program.substring(old,pos);
+    	} else if (program.substring(old, pos+1).matches("/\\*\\*")) { // Javadoc check
+    		pos=pos+1;
+    		lexeme=program.substring(old,pos);
+    		while(!lexeme.endsWith("*/")) {
+    			pos++;
+    			lexeme=program.substring(old,pos);
+    		}
+    	}
+    
+    	// Check to see if we have more content after the commment, if we don't then set the Token as being "comment"
+    	// Else if we do then move on and get try to find where we have a legit assignment to act on.
+    	if (done()) {
+    		token = new Token("comment");
+    	} else {
+    		next();
+    	}
+    }
+    
+    /**
+     * Takes the next number based on sign and turns it into a token
+     */
+    private void nextSign() {
+    	int old=pos;
+    	pos=old+2;
+    	String lexeme = program.substring(old,pos);
+    	while (!done() && !lexeme.endsWith("-") && !lexeme.endsWith("+") && !lexeme.endsWith("*") && !lexeme.endsWith("/") && !lexeme.endsWith(";")) {
+    		pos++;
+    		lexeme = program.substring(old,pos);
+    	}
+    	pos--;
+    	lexeme = program.substring(old,pos);
+    	token=new Token("num",program.substring(old,pos));; // taking our next token to be 2 characters
+    }
+    
     // This method determines the kind of the next token (e.g., "id"),
     // and calls a method to scan that token's lexeme (e.g., "foo").
     public boolean next() {
@@ -129,10 +216,14 @@ public class Scanner {
 	    return false;
 	many(whitespace);
 	String c=program.charAt(pos)+"";
-	if (digits.contains(c))
+	if (comments.contains(c+"/") || comments.contains(c + "*") || comments.contains(c+"**"))
+		nextComm();
+	else if (digits.contains(c))
 	    nextNumber();
 	else if (letters.contains(c))
 	    nextKwId();
+	else if (signs.contains(c))
+		nextSign();
 	else if (operators.contains(c))
 	    nextOp();
 	else {

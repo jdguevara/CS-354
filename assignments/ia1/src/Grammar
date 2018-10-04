@@ -5,9 +5,10 @@ expr  : term addop expr
 term  : fact mulop term
       | fact
 fact  : id 
-      | num
+      | (sign) num
       | '(' expr ')'
 addop : '+'
       | '-'
 mulop : '*'
       | '/'
+sign  : '-'
