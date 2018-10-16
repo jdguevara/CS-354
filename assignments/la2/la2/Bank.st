@@ -30,7 +30,7 @@ Object subclass: Bank [
     ]
 
     |bank| bank:=Bank new.
-    |customer| customer:=new init: 'Ann'.
+    |customer| customer:=Customer new init: 'Ann'.
     bank add: (((account:=CheckingAccount new number: '01001') customer: c) balance: 100.00).
     bank add: (((account:=SavingsAccount new number: '01002') customer: c) balance: 200.00).
     bank accrue: 0.02.
