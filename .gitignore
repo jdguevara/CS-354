@@ -4,4 +4,4 @@ slides/
 pub/
 *.pdf
 *.class
-.idea/
+*.idea/*
