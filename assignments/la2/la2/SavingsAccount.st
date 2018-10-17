@@ -3,24 +3,18 @@
 "author - Jaime Guevara"
 
 Account subclass: SavingsAccount [
-
-    |interest| interest:=0.0.
-
-    SavingsAccount class [
-        new: n customer:c balance:b [
-            ^super new init: n customer:c balance:b
-        ]
-    ]
+    |interest|
 
     init: n customer: c balance: b [
         number:=n.
         customer:=c.
-        balance:=b
+        balance:=b.
+		interest:=0.0
     ]
 
     accrue: rate [
         balance:=balance+(balance*rate).
-        interest:=interest+(balance*rate).
+        interest:=interest+(interest*rate).
     ]
 
 ]

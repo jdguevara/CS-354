@@ -8,7 +8,7 @@ Object subclass: Customer [
 
     Customer class [
         new: n [
-            ^super new init:n
+            ^self new init:n
         ]
     ]
 

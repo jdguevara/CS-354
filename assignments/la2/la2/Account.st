@@ -9,8 +9,8 @@ Object subclass: Account [
     |balance|
 
     Account class [
-        new: n customer:c balance:b [
-            ^super new init: n customer:c balance:b
+        new: n customer: c balance: b [
+            ^self new init: n customer: c balance: b
         ]
     ]
 
@@ -35,7 +35,7 @@ Object subclass: Account [
     ]
 
     asString [
-	    ^number:=number , ':' , customer , ':' , balance
-    ]
+		^number asString, ':', customer asString, ':', balance asString.
+	]
 
 ]

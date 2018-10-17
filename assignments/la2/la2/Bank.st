@@ -12,7 +12,7 @@ Object subclass: Bank [
     ]
 
     init [
-        Account := Set new
+        accounts:= Set new
     ]
 
     add: account [
@@ -29,10 +29,11 @@ Object subclass: Bank [
         ^r
     ]
 
-    |bank| bank:=Bank new.
-    |customer| customer:=Customer new init: 'Ann'.
-    bank add: (((account:=CheckingAccount new number: '01001') customer: c) balance: 100.00).
-    bank add: (((account:=SavingsAccount new number: '01002') customer: c) balance: 200.00).
-    bank accrue: 0.02.
-    bank asString printNl
 ]
+   
+|bank| bank:=Bank new.
+|c| c:=Customer new: 'Ann'.
+bank add: (CheckingAccount new: '01001' customer: c balance: 100.00).
+bank add: (SavingsAccount new: '01002' customer: c balance: 200.00).
+bank accrue: 0.02.
+bank asString printNl
