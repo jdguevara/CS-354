@@ -8,25 +8,33 @@ Object subclass: Account [
     |customer|
     |balance|
 
-    accrue: rate [
-        ^self
+    Account class [
+        new: n customer:c balance:b [
+            ^super new init: n customer:c balance:b
+        ]
     ]
 
-    balance [
+    init: n customer:c balance:b [
+        ^self subclassResponsibility
+    ]
+
+    accrue: rate [
+        ^self subclassResponsibility
+    ]
+
+    accountBalance [
 	    ^balance
     ]
 
     deposit: amount [
-	    balance:=balance+amount.
-	    ^self
+	    balance:=balance+amount
     ]
 
     withdraw: amount [
-	    balance:=balance-amount.
-	    ^self
+	    balance:=balance-amount
     ]
 
-    toString [
+    asString [
 	    ^number:=number , ':' , customer , ':' , balance
     ]
 

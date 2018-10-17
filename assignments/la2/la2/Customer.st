@@ -7,16 +7,17 @@ Object subclass: Customer [
     |name|
 
     Customer class [
-        new [
-            ^super new init
+        new: n [
+            ^super new init:n
         ]
     ]
 
-    init: name [
-        self name:=name
+    init: n [
+        name:=n
+    ]
 
-    toString [
-	    ^self name
+    asString [
+	    ^name
     ]
 
 ]

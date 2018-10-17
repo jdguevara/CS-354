@@ -2,26 +2,25 @@
 "Smalltalk savings account class"
 "author - Jaime Guevara"
 
-Object subclass: SavingsAccount subclass: Account [
+Account subclass: SavingsAccount [
 
-    |interest| interest:=0;
+    |interest| interest:=0.0.
 
     SavingsAccount class [
-        new [
-            ^super new init
+        new: n customer:c balance:b [
+            ^super new init: n customer:c balance:b
         ]
     ]
 
-    init: number: n customer: c balance: b [
-        self number:=n.
-        self customer:=c.
-        self balance:=b
+    init: n customer: c balance: b [
+        number:=n.
+        customer:=c.
+        balance:=b
     ]
 
     accrue: rate [
         balance:=balance+(balance*rate).
         interest:=interest+(balance*rate).
-        ^self
     ]
 
 ]

@@ -2,21 +2,21 @@
 "Smalltalk Checking Account class"
 "author - Jaime Guevara"
 
-Object subclass: CheckingAccount subclass: Account [
+Account subclass: CheckingAccount [
     |number|
     |customer|
     |balance|
 
     CheckingAccount class [
-        new [
-            ^super new init
+        new: n customer:c balance:b [
+            ^super new init: n customer:c balance:b
         ]
     ]
 
-    init: number: n customer: c balance: b [
-	    self number:=n.
-	    self customer:=c.
-	    self balance:=b
+    init: n customer: c balance: b [
+	    number:=n.
+	    customer:=c.
+	    balance:=b
     ]
 
     accrue: rate[]

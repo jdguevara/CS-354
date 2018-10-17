@@ -23,9 +23,9 @@ Object subclass: Bank [
         accounts do: [ :account | account accrue: rate]
     ]
 
-    toString [
+    asString [
         |r| r:=''.
-        accounts do: [ :each | r:=r, (Character c asString), each toString].
+        accounts do: [ :account | r:=r, account asString, (Character nl asString)].
         ^r
     ]
 
@@ -34,5 +34,5 @@ Object subclass: Bank [
     bank add: (((account:=CheckingAccount new number: '01001') customer: c) balance: 100.00).
     bank add: (((account:=SavingsAccount new number: '01002') customer: c) balance: 200.00).
     bank accrue: 0.02.
-    bank toString
+    bank asString printNl
 ]
