@@ -1,0 +1,16 @@
+Jaime Guevara
+CS-354 Sec. 1
+
+This program is a Smalltalk port of the Java banking program found in 
+/pub/la2/
+
+All classes have been translated to Smalltalk, and in order to get them
+to run on Onyx the following command has to be provided from within the
+directory for this submission:
+
+$gst Customer.st Account.st CheckingAccount.st SavingsAccount.st Bank.st
+
+The output should be: 
+'01002:Ann:204.0
+01001:Ann:100.0
+'
