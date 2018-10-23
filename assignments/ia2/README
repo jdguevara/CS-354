@@ -1,0 +1,24 @@
+Jaime Guevara
+CS-354 Sec. 1
+IA2 - October 22, 2018
+
+This is the second part of the Interpreter Assignment for CS-354.
+
+Unfortunately the first time around, I was unable to spend much time on the
+first part of the interpreter, and subsequently was able to get the program
+to recognize the unary minus (at the cost of subtraction) and multiple types
+of comments in Java (i.e. //, /*, and /**, */). However, for this one I 
+decided to restart and spend more time trying to get the grammar, lexemes, 
+and tokens to work correctly. I believe I have succeeded in this, unfortunately
+I still need to debug the program better, as it is throwing out an error when
+parsing (yet it still carries out the operations required faithfully, for 
+the most part).
+
+In order to get the project to run you'll have to do the following:
+
+1. $ javac *.java // This compiles all java classes
+2. $ java Interpreter "<input 1>" ("<input 2> ...") // Run the program (optional multiple arguments)
+
+
+There is also a test suite located in: ./src/test/ that will attempt to run some tests,
+unfortunately at the moment because of the parsing error being thrown they fail.
