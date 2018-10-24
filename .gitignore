@@ -5,3 +5,4 @@ pub/
 *.pdf
 *.class
 .idea
+pub.sh
