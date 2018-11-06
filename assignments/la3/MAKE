@@ -1,6 +1,4 @@
 #!/bin/bash -x
 gplc meetone.pl
-#gplc meet.pl
 
-./meetone
-#./meet
+#./meetone
