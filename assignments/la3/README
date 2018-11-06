@@ -1,0 +1,35 @@
+Jaime Guevara
+CS-354 Sec.1
+11/07/2018
+LA3
+
+This program proved more difficult that I thought it'd be, the conventions
+of Prolog did not really sit all that well with me, or at least I could
+better say that in the time that I allotted myself to complete I was not
+able to fully grasp Prolog and fully implement the predicates as outlined.
+
+To compile and run the program you can either run the bash script 'MAKE'
+
+``````````````````
+$ ./MAKE
+
+``````````````````
+Or manually compile meet.pl through the GNU Prolog Compiler
+
+```````````````````
+$ gplc meet.pl
+
+```````````````````
+
+This should output an executable file called 'meet'
+to run it just execute it trough the command line
+
+````````````````````
+$ ./meet
+
+```````````````````
+
+Unfotunately, as stated before running this at the moment only spits out
+'ann' as I wasn't able to get the program to spit out 'bob' and 'carla'
+as they too were available at those times. I hope to be able to get this
+corrected in the future on my own time.
