@@ -1,0 +1,14 @@
+Jaime Guevara
+CS-354 Sec.1
+11/13/2018
+LA4
+
+The purpose of this Awk script is to take the information from the building
+permit CSV that has been provided and convert it into html for use in displaying
+data of housing permits in the valley.
+
+To run this script:  
+
+$ ./run <name of data file> 
+
+The program will emit an output.html that contains a table of the data. Also note, the first line of the data file is considered schema and is not included in the table
