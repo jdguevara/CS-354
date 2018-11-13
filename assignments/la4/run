@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-echo "<html> <head> <title>Boise Housing Listings</title> </head> <body> <h1>Houses Near You!</h1> <table> " > output.html
+echo "<html> <head> <title>Boise Housing Listings</title> </head> <body> <h1>Available Single-family homes in the Boise Area:</h1> <table> " > output.html
 echo "<tr> <th style=\"padding-left:5em\">Subdivision name</th> <th style=\"padding-left:5em\">Price</th> <th style=\"padding-left:5em\">Issue Date</th> <th style=\"padding-left:5em\">Lot(s)</th> <th style=\"padding-left:5em\">Block</th> </tr>" >> output.html
 tail -n +2 $1 | ./parse.sh >> output.html
 echo "</table> </body> </html>" >> output.html
