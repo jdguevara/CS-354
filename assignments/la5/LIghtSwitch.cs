@@ -3,6 +3,9 @@
  * @Author: Jaime Guevara
  * @Class: CS-354
  */
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
  class LightSwitch {
 
@@ -14,6 +17,10 @@
     public LightSwitch() {
         button = new ToggleButton("off", "on");
         counter = new BinaryCounter(0);
-        button.
+        button.click += counter;
+        Panel contentPane = new Panel();
+        contentPane.Controls.Add(button);
+        contentPane.Controls.Add(counter);
+        // TODO: Need to finish implementing this part (help: what is C#'s jFrame?)
     }       
  }

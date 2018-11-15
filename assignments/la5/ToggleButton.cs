@@ -3,9 +3,7 @@
     @Author: Jaime Guevara
     @Class: CS-354
  */
-
-// Declare a delegate that can be used later
-delegate void eventListener();
+using System;
 
  class ToggleButton : Button, EventHandler {
      private string label1, label2;
@@ -14,13 +12,15 @@ delegate void eventListener();
          base(label1);
          this.label1 = label1;
          this.label2 = label2;
-         eventListener listener = new eventListener(actionPerformed);
+         this.actionPerformed += OnActionPerformed;
      }
 
-     public void actionPerformed() {
+     public event EventHandler actionPerformed;
+
+     protected virtual void OnActionPerformed(EventArgs e) {
          string s = label1;
          label1 = label2;
          label2 = s;
-         setText(label1);
+         this.setText(label1);
      }
  }

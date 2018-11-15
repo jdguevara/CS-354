@@ -3,8 +3,7 @@
     @Author: Jaime Guevara
     @Class: CS-354
  */
-
-delegate void eventListerner();
+using System;
 
  class BinaryCounter : Label, EventHandler {
      
@@ -15,7 +14,9 @@ delegate void eventListerner();
          this.count = count;
      }
 
-     public void actionPerformed() {
-         setText(count++);
-     }
+     public event EventHandler actionPerformed;
+
+    protected virtual void OnActionPerformed(EventArgs e) {
+        this.setText(count++);
+    }
  }
